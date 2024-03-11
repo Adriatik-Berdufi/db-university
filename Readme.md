@@ -11,7 +11,7 @@
 
 ## Selezionare tutti gli studenti che hanno più di 30 anni
     SELECT * FROM `students`
-    WHERE YEAR(`date_of_birth`)  < 2024 - 30 ;
+    WHERE YEAR(CURDATE()) - YEAR(`date_of_birth`) > 30;
 
 ## Selezionare tutti corsi del primo semestre del primo anno di un qualsiasi corsodilaurea (286)
     SELECT * FROM `courses`  
@@ -24,7 +24,8 @@
 
 ## Selezionare tutti i corsi di laurea magistrale (38)
 
-    
+    SELECT * FROM `degrees`
+    WHERE `level` = 'magistrale';
 
 
 ## Da quanti dipartimenti è composta l'università? (12)
