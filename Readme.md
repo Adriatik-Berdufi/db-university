@@ -71,3 +71,45 @@
     COUNT(*) AS `degrees`
     FROM `degrees`
     GROUP BY `department_id`;
+
+
+# EX - QUERY CON JOIN
+
+## selezionare tutti gli studenti al corso di economia
+
+    SELECT students.id,students.name,students.surname
+    FROM students
+    INNER JOIN degrees
+    ON degrees.id = students.degree_id
+    WHERE degrees.name = "Corso di Laurea in Economia";
+
+## Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+
+    SELECT degrees.id,degrees.name
+    FROM degrees
+    INNER JOIN departments
+    ON degrees.department_id = departments.id
+    WHERE departments.name = "Dipartimento di Neuroscienze"
+    AND degrees.level = "magistrale";
+
+##  Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
+
+    SELECT *
+    FROM courses
+    INNER JOIN course_teacher
+    ON courses.id = course_teacher.course_id
+    WHERE `course_teacher`.`teacher_id` = 44;
+
+## Selezionare tutti gli studenti con i dati relativi al corso di laurea a cuisono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e nome
+    SELECT
+    students.id,students.name,students.surname,
+    degrees.name AS degree,
+    departments.name AS degree_department
+
+    FROM students
+    INNER JOIN degrees
+    ON degrees.id = students.degree_id
+    INNER JOIN departments
+    ON departments.id = degrees.department_id
+    ORDER BY students.name, students.surname;
+
